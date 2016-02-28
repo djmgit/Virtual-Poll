@@ -1,0 +1,195 @@
+{% load staticfiles %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Virtual Poll:Speak your mind</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!--<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" /> 
+  -->
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    .profpic {
+
+      margin-right : 25px;
+      padding : 10px;
+    }
+    #roller-info{
+
+      font-size: 15px
+      margin-bottom:30px;
+      padding: 0px
+      
+
+    }
+    #tip-info{
+
+      font-size: 15px
+      margin-bottom:30px;
+      padding : 20px 
+      
+
+    }
+    #super-info{
+
+      font-size: 15px
+      margin-bottom:30px;
+      padding: 0px
+
+
+    }
+
+    
+    
+
+    #hello {
+
+      font-family: arial black;
+      font-style:italic;
+
+    }
+    #about{
+
+      font-size:24px;
+    }
+    #col-header{
+
+      font-family:verdana;
+      font-size:18px;
+      font-style:bold;
+      text-align: center;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+
+    #col-body{
+
+      font-family: verdana;
+      font-size: 18px;
+      text-align: center;
+    }
+    #other{
+
+      font-family: verdana;
+      font-size: 18px;
+      margin-bottom: 10px;
+      margin-left:20px;
+      padding-right:50px;
+    }
+    #otherlast{
+
+      font-family: verdana;
+      font-size: 18px;
+      margin-bottom: 100px;
+      margin-left: 20px;
+      padding-right: 50px
+    }
+    .right{
+
+      padding-right: 20px;
+    }
+
+    #label
+    {
+    	text-align: left;
+    	font-size : 18px;
+    	font-family : verdana;
+    }
+    #textarea
+    {
+    	padding-left : 20px;
+    	padding-right : 20px;
+    }
+    #panel-body
+    {
+    	/*padding-left : 200px;
+    	padding-right : 400px;
+      */
+    }
+    #body
+    {
+        text-align: center;
+        padding-left: 400px;
+        padding-right: 400px;
+        padding-top:160px;
+
+    }
+  </style>
+</head>
+<body id="body">
+
+  <div class="panel panel-default">
+    <div class="panel-body" id="panel-body">
+
+
+      
+     
+        <ul class="nav nav-pills">
+        <li ><a href="{% url 'polls:login_form' %}"> Log in</a></li>
+        <li class="active"><a href="#"> Sign up</a></li>
+      </ul>
+      </br>
+        <form role="form" method="POST" action="{% url 'polls:signup_view' %}">
+          <div class="form-group">
+          {% csrf_token %}
+          <label for="first_name">First name</label>
+          <input type="text" name="first_name" id="first_name" class="form-control">
+          </br>
+          <label for="last_name">Last name</label>
+          <input type="text" name="last_name" id="last_name" class="form-control">
+          </br>
+          <label for="username">Username</label>
+            <input type="text" name="username" id="username" class="form-control" >
+            </br>
+             <label for="email">Email</label>
+
+            <input type="text" name="email" id="email" class="form-control">
+            </br>
+             <label for="password">Password</label>
+
+            <input type="password" name="password" id="password" class="form-control">
+
+            </br>
+            <input type="submit" value="Sign up" class="btn btn-primary">
+           
+          </div>
+        </form>
+        
+    </div>  
+  </div>
+
+</body>
+</html>

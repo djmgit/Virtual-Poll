@@ -6,7 +6,17 @@ app_name='polls'
 
 urlpatterns = [
     # ex: /polls/
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.login_form, name='login_form'),
+    url(r'^login/', views.login_form, name='login_form'),
+    url(r'^login_view/', views.login_view, name='login_view'),
+
+    url(r'^index/', views.index, name='index'),
+    url(r'^logout/', views.logout_view, name='logout'),
+
+    url(r'^signup/', views.signup_form, name='signup_form'),
+    url(r'^signup_view/', views.signup_view, name='signup_view'),
+
+
     # ex: /polls/5/
     url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
     # ex: /polls/5/results/

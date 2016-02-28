@@ -5,6 +5,8 @@ from django.template import loader
 from django.http import Http404
 from django .core.urlresolvers import reverse
 from django.views import generic
+from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth.models import User
 
 
 '''
@@ -54,6 +56,46 @@ def results(request, question_id):
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/index.html', {'question': question})  
+
+def login_form(request):
+    return render(request,'polls/login.html')    
+
+def login_view(request):
+    
+    uname=request.POST['username']
+    passd=request.POST['password']
+    user=authenticate(username=uname,password=passd)
+    if user is not None:
+        if user.is_active:
+            login(request,user)
+            return HttpResponseRedirect(reverse('polls:index'))        
+
+            
+
+                
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('polls:login_form'))  
+
+def signup_view(request):
+    uname=request.POST['username']
+    passd=request.POST['password']
+    email=request.POST['email']
+
+    user = User.objects.create_user(uname, email, passd)
+    user.first_name=request.POST['first_name']
+    user.last_name=request.POST['last_name']
+    user.save()
+    return HttpResponseRedirect(reverse('polls:login_form'))  
+
+def signup_form(request):
+    return render(request,'polls/signup.html') 
+
+
+          
+
+
 
 
 '''
