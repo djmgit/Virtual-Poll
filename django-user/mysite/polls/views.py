@@ -20,9 +20,9 @@ def index(request):
 '''
 
 def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    latest_question_list = Question.objects.order_by('-pub_date')
     f_question=get_object_or_404(Question,pk=1)
-    context = {'latest_question_list': latest_question_list,'f_question':f_question}
+    context = {'latest_question_list': latest_question_list,'f_question':f_question,'user':request.user}
     return render(request, 'polls/index.html', context)
 
 
@@ -45,7 +45,7 @@ def detail(request, question_id):
 def detail(request, question_id):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/index.html', {'f_question': question,'latest_question_list':latest_question_list})     
+    return render(request, 'polls/index.html', {'f_question': question,'latest_question_list':latest_question_list,'user':request.user})     
     
 '''
 def results(request, question_id):
@@ -147,7 +147,7 @@ def comment(request, question_id):
             'error_message': "You didn't select a choice.",
         })
     else:
-        c=question.comment_set.create(comment_text=cmn)
+        c=question.comment_set.create(comment_text=cmn,user=request.user.username)
         c.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a

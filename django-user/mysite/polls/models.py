@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 import datetime
+from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -24,6 +26,7 @@ class Question(models.Model):
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
     def __str__(self):
@@ -32,6 +35,7 @@ class Choice(models.Model):
 
 class Comment(models.Model):
 	question=models.ForeignKey(Question,on_delete=models.CASCADE)
+	user=models.CharField(max_length=200,default='none')
 	comment_text=models.CharField(max_length=200)
 	def __str__(self):
 		return self.comment_text

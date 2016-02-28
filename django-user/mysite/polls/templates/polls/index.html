@@ -138,6 +138,16 @@
     	/*padding-left : 20px;
     	padding-right : 20px;*/	
     }
+    #user_info
+    {
+    	font-size:20px;
+    	font-family:verdana;
+    	
+    }
+    #body
+    {
+    	margin-bottom: 400px;
+    }
     
 
 
@@ -145,7 +155,7 @@
     
   </style>
 </head>
-<body>
+<body id="body">
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -164,6 +174,9 @@
 </nav>
   
 <div class="container">
+<div id="user_info">
+	Hello {{ user.username }}!!
+</div>
   
   
 
@@ -226,7 +239,22 @@
 									<div class="list-group">
 										{% for comment in f_question.comment_set.all %}
 
-											<li class="list-group-item">{{comment.comment_text}}</li>
+											<li class="list-group-item">
+												<div class="row">
+         											 <div class="col-sm-4">
+         											 	<div class="col-body">
+         											 		{{ comment.user }} :
+         											 	</div>
+         											 </div>
+         											 <div class="col-sm-4">
+         											 	<div class="col-body">
+         											 		{{ comment.comment_text }}
+         											 	</div>
+         											 </div>
+         										</div>	 			
+												
+
+											</li>
 										{% endfor %}	
 									</div>
 										
