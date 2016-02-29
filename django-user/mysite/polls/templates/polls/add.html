@@ -1,0 +1,210 @@
+{% load staticfiles %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Virtual Poll:Speak your mind</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!--<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" /> 
+  -->
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    .profpic {
+
+      margin-right : 25px;
+      padding : 10px;
+    }
+    #roller-info{
+
+      font-size: 15px
+      margin-bottom:30px;
+      padding: 0px
+      
+
+    }
+    #tip-info{
+
+      font-size: 15px
+      margin-bottom:30px;
+      padding : 20px 
+      
+
+    }
+    #super-info{
+
+      font-size: 15px
+      margin-bottom:30px;
+      padding: 0px
+
+
+    }
+
+    
+    
+
+    #hello {
+
+      font-family: arial black;
+      font-style:italic;
+
+    }
+    #about{
+
+      font-size:24px;
+    }
+    #col-header{
+
+      font-family:verdana;
+      font-size:18px;
+      font-style:bold;
+      text-align: center;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+
+    #col-body{
+
+      font-family: verdana;
+      font-size: 18px;
+      text-align: center;
+    }
+    #other{
+
+      font-family: verdana;
+      font-size: 18px;
+      margin-bottom: 10px;
+      margin-left:20px;
+      padding-right:50px;
+    }
+    #otherlast{
+
+      font-family: verdana;
+      font-size: 18px;
+      margin-bottom: 100px;
+      margin-left: 20px;
+      padding-right: 50px
+    }
+    .right{
+
+      padding-right: 20px;
+    }
+
+    #label
+    {
+    	text-align: left;
+    	font-size : 18px;
+    	font-family : verdana;
+    }
+    #textarea
+    {
+    	padding-left : 20px;
+    	padding-right : 20px;
+    }
+    #panel-body
+    {
+    	/*padding-left : 20px;
+    	padding-right : 20px;*/	
+    }
+    #user_info
+    {
+    	font-size:20px;
+    	font-family:verdana;
+    	
+    }
+    #body
+    {
+    	margin-bottom: 400px;
+    }
+    
+
+
+
+    
+  </style>
+</head>
+<body id="body">
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Virtual Poll</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="{% url 'polls:index' %}">Home</a></li>
+      <li class="active"><a href="#">Add question</a></li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'polls:logout' %}"><span class="glyphicon glyphicon-user"></span> Log out</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <form role='form' method='POST' action="{% url 'polls:save_question' %}">
+    {% csrf_token %}
+    <div class='form-group'>
+      <div class="row">
+          <div class="col-sm-4">
+           <div class="col-body">
+            <label for="question">Add question</label>
+            <textarea class="form-control" id='question' name='question' row='10' ></textarea>
+           </div> 
+          </div>
+          <div class="col-sm-8">
+            <div class="col-body">
+            <label for="choice1">Add choice 1</label>
+            <input type="text" id='choice1' name='choice1' class='form-control' >
+            </br>
+            <label for="choice1">Add choice 2</label>
+            <input type="text" id='choice2' name='choice2' class='form-control' >
+            </br>
+            <label for="choice1">Add choice 3</label>
+            <input type="text" id='choice3' name='choice3' class='form-control' >
+            </br>
+            <input type="submit" value="Save question" class="btn btn-primary">
+            </div>
+
+
+          </div>
+     </div>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

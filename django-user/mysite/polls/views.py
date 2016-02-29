@@ -7,6 +7,7 @@ from django .core.urlresolvers import reverse
 from django.views import generic
 from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 '''
@@ -43,7 +44,7 @@ def detail(request, question_id):
 '''
 
 def detail(request, question_id):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    latest_question_list = Question.objects.order_by('-pub_date')
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/index.html', {'f_question': question,'latest_question_list':latest_question_list,'user':request.user})     
     
@@ -91,6 +92,28 @@ def signup_view(request):
 
 def signup_form(request):
     return render(request,'polls/signup.html') 
+
+def add_question(request):
+    return render(request,'polls/add.html') 
+
+def save_question(request):
+    q_text=request.POST['question']
+    c1=request.POST['choice1']
+    c2=request.POST['choice2']
+    c3=request.POST['choice3']
+
+    q=Question(question_text=q_text,pub_date=timezone.now(),username=request.user.username)
+    q.save()
+    q.choice_set.create(choice_text=c1,votes=0)
+    q.choice_set.create(choice_text=c2,votes=0)
+    q.choice_set.create(choice_text=c3,votes=0)
+
+    return HttpResponseRedirect(reverse('polls:add_question')) 
+
+
+
+
+
 
 
           

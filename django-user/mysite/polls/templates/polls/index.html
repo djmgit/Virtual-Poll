@@ -148,6 +148,19 @@
     {
     	margin-bottom: 400px;
     }
+    #q_authordetails
+    {
+    	 font-size: 15px;
+    	 font-family: verdana;
+    	 font-style: italic;
+    }
+    
+    
+   #scrollablebody {
+    
+    overflow-y: scroll; 
+  }
+
     
 
 
@@ -164,6 +177,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
+      <li><a href="{% url 'polls:add_question' %}">Add question</a></li>
       
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -186,11 +200,11 @@
             <div class="page-header" id='col-header'>
               Choose a Question
             </div>
-            <div id="col-body">
+            <div id="col-body" id="scrollablebody">
             	
             		<div class='panel panel-default'>
             			
-            			<div class='panel-body'>
+            			<div class='panel-body'> 
 		              		{% if latest_question_list %}
 
 			    				<div class='list-group'>
@@ -203,7 +217,7 @@
 				    					<p>No polls are available.</p>
 				  					{% endif %}
 				  		</div>			
-			  		</div>			
+			  		</div>		
 		  				
 		  				
 	  					
@@ -216,7 +230,25 @@
             </div>
             <div id="col-body">
             		<div class='panel panel-default'>
-            			<div class='panel-heading'>{{f_question.question_text}}</div>
+            			<div class='panel-heading'>
+            				<div class="row">
+            					<div class='col-sm-4'>
+            						<div class="col-body">
+            							<div id="q_authordetails">
+            								Auther:{{ f_question.username }}
+            								</br>
+            								{{ f_question.pub_date }}
+            							</div>	
+            						</div>
+            					</div>
+            					<div class='col-sm-4'>
+            						<div class="col-body">
+            								{{ f_question.question_text }}
+            						</div>
+            					</div>
+            				</div>
+
+            			</div>
             			
             			<div class='panel-body' id="panel-body">
 		              				<form action="{% url 'polls:vote' f_question.id %}" method="post" class='form-horizontal' role="form">

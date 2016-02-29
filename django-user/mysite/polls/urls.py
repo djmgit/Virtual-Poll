@@ -15,6 +15,8 @@ urlpatterns = [
 
     url(r'^signup/', views.signup_form, name='signup_form'),
     url(r'^signup_view/', views.signup_view, name='signup_view'),
+    url(r'^add_question/', views.add_question, name='add_question'),
+    url(r'^save_question/', views.save_question, name='save_question'),
 
 
     # ex: /polls/5/
